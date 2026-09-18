@@ -8,6 +8,7 @@ import Studio from './views/Studio';
 import Compliance from './views/Compliance';
 import Library from './views/Library';
 import Reader from './views/Reader';
+import Settings from './views/Settings';
 
 function AppContent() {
   const { state } = useStore();
@@ -39,6 +40,7 @@ function AppContent() {
       case 'compliance': return <Compliance />;
       case 'library': return <Library />;
       case 'reader': return <Reader />;
+      case 'settings': return <Settings />;
       default: return <Dashboard />;
     }
   };

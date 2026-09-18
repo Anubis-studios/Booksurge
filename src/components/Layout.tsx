@@ -8,6 +8,7 @@ export const Icons = {
   paint: <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M232,120H176V64a8,8,0,0,0-8-8H136a8,8,0,0,0-8,8v56H72a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8h56v56a8,8,0,0,0,8,8h32a8,8,0,0,0,8-8V168h56a8,8,0,0,0,8-8V128A8,8,0,0,0,232,120Z"/></svg>,
   check: <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>,
   books: <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H160V24a8,8,0,0,0-16,0v8H96V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Z"/></svg>,
+  settings: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
 };
 
 const NAV_ITEMS = [
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
   { id: 'studio', label: 'Design Studio', icon: Icons.paint },
   { id: 'compliance', label: 'KDP Compliance', icon: Icons.check },
   { id: 'library', label: 'My Library', icon: Icons.books },
+  { id: 'settings', label: 'Settings', icon: Icons.settings },
 ];
 
 export function Header() {
@@ -77,7 +79,7 @@ export function MobileNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 h-16 bg-[rgba(9,9,11,0.95)] border-t border-[var(--border)] flex justify-around items-center pb-[env(safe-area-inset-bottom)] z-50 md:hidden">
-      {NAV_ITEMS.map(n => (
+      {NAV_ITEMS.slice(0, 5).map(n => (
         <button
           key={n.id}
           onClick={() => nav(n.id)}
@@ -89,6 +91,15 @@ export function MobileNav() {
           <span>{n.label.split(' ')[0]}</span>
         </button>
       ))}
+      <button
+        onClick={() => nav('settings')}
+        className={`flex flex-col items-center gap-1 bg-transparent border-none text-[10px] cursor-pointer flex-1 ${
+          view === 'settings' ? 'text-[var(--accent)]' : 'text-[var(--muted)]'
+        }`}
+      >
+        {Icons.settings}
+        <span>Settings</span>
+      </button>
     </nav>
   );
 }
